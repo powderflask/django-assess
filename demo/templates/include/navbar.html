@@ -1,0 +1,31 @@
+{% block navbar %}
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          {% block navbar_brand %}
+            <div>
+              <a class="navbar-brand"
+                 href="{% url 'assessment.assess:matrix' %}">
+                    <span class="bchydro-green">QA</span>/<span class="bchydro-blue">QC</span>
+              </a>
+            </div>
+            <div class="tagline">Quality, Safety, and Environmental Assessment Tool</div>
+          {% endblock navbar_brand %}
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          {% block navbar_menu %}
+            {% include 'include/auth_menu.html' %}
+
+            {% include 'include/nav_menu.html' %}
+          {% endblock navbar_menu %}
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+{% endblock navbar %}

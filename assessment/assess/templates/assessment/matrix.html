@@ -1,0 +1,36 @@
+{% extends 'assessment/base.html' %}
+
+{% block content %}
+
+    <h2>Assessment Matrix</h2>
+
+    <table class="table table-bordered assessment-matrix">
+        <tr>
+            <th></th>
+            {% for activity in activities %}
+                <th>
+                    <a href="{% url 'assessment.assess:activity' activity.slug %}" title="Assessment sets for {{ activity }}">
+                    {{ activity }}
+                    </a>
+                </th>
+            {% endfor %}
+        </tr>
+        {% for topic, row in matrix %}
+            <tr>
+                <th>
+                    <a href="{% url 'assessment.assess:topic' topic.slug %}" title="Assessment sets for {{ topic }}">
+                        {{ topic }}
+                    </a>
+                </th>
+                {% for category in row %}
+                    <td>
+                        <a href="{{ category.get_absolute_url }}" title="{{ category.description }}">
+                            {{ category }}
+                        </a>
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock content %}

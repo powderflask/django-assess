@@ -1,0 +1,63 @@
+{# list of metric scores for a single assessment_record #}
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading-{{ assessment_record.pk }}">
+      <h4 class="panel-title">
+        {% include 'assessment/include/assessment_record_score_badge.html' with record=assessment_record %}
+        <a role="button" data-toggle="collapse" data-parent="#accordion"
+           href="#collapse-{{ assessment_record.pk }}" aria-expanded="true" aria-controls="collapse-{{ assessment_record.pk }}">
+        {{ assessment_record.category }}
+        </a>
+        {% if assessment_record.score_set.count and user_can_edit_assessment %}
+            <a class="pull-right" href="{{ assessment_record.get_update_url }}" title="Edit this record">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </a>
+        {% endif %}
+      </h4>
+    </div>
+
+    <div id="collapse-{{ assessment_record.pk }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ assessment_record.pk }}">
+
+      {% regroup assessment_record.scores_by_question by metric.question as question_groups %}
+
+      <div class="panel-group">
+      {% for question in question_groups %}
+        <div class="assessment-record-questions panel panel-default">
+            <div class="panel-heading">
+                <h5 class="panel-title">{{ question.grouper }}</h5>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                {% for score in question.list %}
+                    <li class="list-group-item">
+                        <div class="row assessment-metric-score">
+                          {% if score.applicable %}
+                            <div class="col-sm-7">
+                                <div>
+                                    <span class="badge score {{ score.score_class }}">{{ score.get_score }}</span>
+                                    <span class="metric label label-primary">{{ score.metric }}</span>
+                                    <span class="score-display label label-info {{score.score_class}}">
+                                        {{ score.get_score_display }}
+                                    </span>
+                                </div>
+                                {% include 'assessment/include/supporting_docs.html' %}
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="score-comments text-muted">{{ score.comments }}</div>
+                            </div>
+                         {% else %}
+                            <div class="col-sm-7">
+                                <span class="score score-na">N/A</span>
+                                <span class="not-applicable">{{ score.metric }}</span>
+                            </div>
+                          {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>

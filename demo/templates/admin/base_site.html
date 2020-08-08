@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ title }} | {% trans 'QA/QC site admin' %}{% endblock %}
+{% block extrastyle %}
+{% endblock %}
+
+{% block branding %}
+	  <header id="branding" role="banner">
+ 			<h1 id="site-title">
+        <a href="{% url 'assessment.assess:matrix' %}" title="QA/QC" rel="home">QA/QC Assessment Tool</a>
+      </h1>
+      <p>Administration Interface (staff only)</p>
+	  </header><!-- #branding -->
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

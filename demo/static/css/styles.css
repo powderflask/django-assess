@@ -1,0 +1,263 @@
+
+/*-------------------------------------------------- */
+/* Bootstrap overrides
+---------------------------------------------------*/
+.navbar-brand {
+  float: none;
+  font-size: 2.5em;
+  line-height: 30px
+}
+.tagline {
+  font-size: 1.1em;
+}
+
+.navbar {
+    font-family: "Antic", Arial, Helvetica, sans-serif;
+}
+.navbar-collapse.in {
+    overflow-y: inherit;
+}
+.navbar-collapse.in .dropdown-menu-right {
+    text-align: right;
+}
+
+.alert {
+    margin-top: 24px;  /* push alert below fixed navbar */
+}
+
+.jumbotron p {
+  font-size: 1.1em;
+}
+.jumbotron {
+    font-family: "Antic", Arial, Helvetica, sans-serif;
+    position: relative;
+    padding: 15px 15px;
+}
+
+.form-control { /* padding on form-control messes up narrow column, inline-labels */
+    /*padding: inherit;  /* but this rule messes up controls with prepended text :-( */
+}
+
+.dropdown-menu > li > ul > li > a {  /* make sub-menu links look same as primary ones */
+    display: block;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.carousel-control.left, .carousel-control.right {
+  background-image:none;
+  margin-top:10%;
+  width:5%;
+}
+
+.page-header {
+    color: grey;
+    margin: 10px 0 20px;
+}
+
+.panel .panel-group {  /* nested panels */
+    margin: 1em;
+}
+
+.list-group-item .table {
+    margin-bottom: 10px;
+}
+h5.panel-title {
+    font-size: 14px;
+}
+h5.bg-danger,
+h5.bg-primary {
+    padding: 10px;
+}
+
+
+/* Fixed Navbar
+-------------------------------------------------- */
+body > .container {
+    padding-top: 120px;
+}
+.navbar-default {
+    background-color: white;
+    border-color: #2D2970;
+    padding: 20px 0 10px 0;
+    border-top: 30px solid #2D2970;;
+    border-bottom: none;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
+  color: #1A80B6;
+  background-color: white;
+  font-size: 1.1em;
+}
+
+.navbar-fixed-top {
+  opacity: 0.95;
+}
+.navbar-brand {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.navbar .navbar-nav.navbar-right {
+    margin-right: 10%;
+}
+
+.navbar .dashboard-nav {
+    margin-right: 15px;
+}
+@media (max-width: 767px) { /* hide dashboard-nav button on small screens */
+    .navbar .dashboard-nav {
+        display: none;
+    }
+}
+
+/* Sticky form actions
+------------------------------------------------- */
+.form-actions {
+    position: fixed;  /* fallback for Chrome etc. */
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+    bottom: 20px;
+    width: 50%;
+    z-index: 200;
+}
+
+
+/* Sticky footer
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 30px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+  opacity: 0.75;
+  z-index: 100;
+}
+
+/* Footer elements */
+.footer .copyright {
+    position: absolute;
+    bottom: -5px;
+    left: 40%;
+}
+
+/*  Custom Elements
+------------------------------ */
+.bchydro-blue {
+  color: #00ADEF;
+}
+.bchydro-green {
+  color: #4DB749;
+}
+form input[name='label'] {
+    width: 40em;
+}
+
+.dl-single-horizontal dt {
+    font-size: 1.2em;
+    float: left;
+    clear: left;
+    margin-right: 2em;
+}
+
+.assessment-record .assessor {
+    float: right;
+    clear: right;
+}
+.assessment-record .last-edited {
+    font-size: 0.8em;
+    float: right;
+    clear: right;
+}
+.assessment-record .status {
+    float: left;
+    clear: left;
+    font-size: 1.2em;
+    font-weight: 500;
+    font-family: Arial,sans-serif;
+}
+.status.draft {
+    color: darkorange;
+}
+.status.complete {
+    color: darkgreen;
+}
+
+/* a little CSS hackery here to keep templates clean - move status widget up to cover over status value */
+.assessment-form {
+    position: relative;
+}
+.assessment-form .status-widget {
+    position: absolute;
+    top: -55px;
+    left: 15px;
+}
+.assessment-form .status-widget label {
+    display: none;
+}
+
+.assessment-metric-score .supporting-docs {
+    margin: 0.5em 0.5em 0.5em 3em;
+}
+.assessment-metric-score .metric {
+    display: inline-block;
+    font-size: inherit;
+}
+
+.assessment-record-tools a {
+    margin: 0 5px;
+}
+.supporting-docs .media-body .media-heading,
+.supporting-docs .media-body p {
+    display: inline;
+    padding-right: 10px;
+}
+.supporting-docs .media-body p {
+    font-size: small;
+}
+
+.badge.score {
+    margin-right: 0.6em;
+    font-size: 1em;
+}
+.label.score-display {
+    margin-left: 0.6em;
+}
+.panel-default > .panel-heading .badge.fail,   /* bootstrap! */
+.fail, .score-0 {
+    background-color: red;
+}
+.panel-default > .panel-heading .badge.poor,
+.poor, .score-1 {
+    background-color: orange;
+}
+.panel-default > .panel-heading .badge.satisfactory,
+.satisfactory {
+    background-color: darkkhaki;
+}
+.panel-default > .panel-heading .badge.good,
+.good, .score-2 {
+    background-color: green;
+}
+.not-applicable {
+    opacity: 60%;
+    font-size: 0.9em;
+}

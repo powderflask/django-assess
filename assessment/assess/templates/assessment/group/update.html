@@ -1,0 +1,16 @@
+{% extends 'assessment/group/base.html' %}
+{% load helper_tags %}
+
+{% block content %}
+
+    <div class="pull-right">
+        {% include 'assessment/include/reference_docs.html' with category=assessment_group %}
+    </div>
+
+    <h3>Assessment Set in: {{ assessment_group.root|linkify }}</h3>
+
+    {% include 'assessment/include/assessment_record_info.html' with assessment_record=assessment_group.assessment_set.first %}
+
+    {% include 'assessment/include/assessment_form.html' %}
+
+{% endblock content %}

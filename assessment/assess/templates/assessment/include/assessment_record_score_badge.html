@@ -1,0 +1,4 @@
+
+{% if record.score_set.count %}
+    <span class="badge score {{ record.score_class }}">{{ record.assessment_score|floatformat:-2 }}</span>
+{% endif %}

@@ -1,0 +1,35 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>
+        QA/QC {% block title %}| Internal Sever Error {% endblock %}
+    </title>
+
+  </head>
+
+  {# 500 error are passed NO CONTEXT ! #}
+  
+  <body>
+    <div class="container">
+      <div class='error'>
+        {% block error_message %}
+            <div class="error-500">
+              <h2>Sorry!  An error occurred while processing your request...</h2>
+              <p>An unexpected error has been detected (server error code: 500).</p>
+            </div>
+
+            <p>This service may be temporarily unavailable.  Please try again later.</p>
+            <p><a href="{% url 'assessment.assess:matrix' %}">QA/QC Assessment Matrix Homepage</a></p>
+
+            <p>If this problem persists, please
+                  <a href="mailto:info@chartwell-consultants.com?subject=QA/QC Assessment Web Tool">contact Chartwell Consultants Ltd.</a>
+            </p>
+        {% endblock %}
+      </div>
+    </div> <!-- container -->
+
+    {% include 'include/footer.html' %}
+  </body>
+</html>

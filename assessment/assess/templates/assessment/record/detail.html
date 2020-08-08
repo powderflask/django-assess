@@ -1,0 +1,15 @@
+{% extends 'assessment/record/base.html' %}
+{% load helper_tags %}
+
+{% block content %}
+    <div class="pull-right">
+        {% include 'assessment/include/reference_docs.html' with category=assessment_record.category %}
+    </div>
+
+    <h3>Assessment Record: {{ assessment_record.category|linkify }}</h3>
+
+    {% include 'assessment/include/assessment_record_info.html' %}
+
+    {% include 'assessment/include/assessment_scores.html' %}
+
+{% endblock content %}

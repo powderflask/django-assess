@@ -1,0 +1,21 @@
+<div class="supporting-docs">
+  {% for doc in score.doc_set.all %}
+    <div class="media">
+        <div class="media-left">
+            <a href="{{ doc.href }}" target="_blank" title="{{ doc }}">
+                {% if doc.document_location == 'url' %}
+                    <span class="media-object glyphicon glyphicon-link" aria-hidden="true"></span>
+                {% else %}
+                    <span class="media-object glyphicon glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                {% endif %}
+            </a>
+        </div>
+        <div class="media-body">
+            <h6 class="media-heading">{{ doc }}</h6>
+           <p class="text-muted">{{ doc.description }}</p>
+        </div>
+    </div>
+  {% endfor %}
+</div>
+
+

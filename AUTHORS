@@ -1,0 +1,19 @@
+# The humans responsible & technology colophon
+
+# TEAM
+
+    powderflask -- software design / programming
+
+# THANKS
+
+    BC Hydro and Chartwell Consulting, Canada
+
+# TECHNOLOGY COLOPHON
+
+    Python3, HTML5, JavaScript (Bootstrap + JQuery for demo project)
+    Django
+    django-ordered-model, django-private-storage, django-tables2, django-filter
+
+# ACKNOWLEDGEMENTS
+    favion by Gerd Altmann from Pixabay https://pixabay.com/users/geralt-9301/
+    <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=571148">Gerd Altmann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=571148">Pixabay</a>

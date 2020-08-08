@@ -1,0 +1,357 @@
+[
+{
+  "model": "builder.activity",
+  "pk": 1,
+  "fields": {
+    "order": 0,
+    "status": "active",
+    "label": "Recruitment & Intake",
+    "slug": "recruitment-intake",
+    "description": "Activities related to attracting, recruiting, registering, and retaining students."
+  }
+},
+{
+  "model": "builder.activity",
+  "pk": 2,
+  "fields": {
+    "order": 1,
+    "status": "active",
+    "label": "Teaching and Learning",
+    "slug": "teaching-learning",
+    "description": "Activities related to courses, classrooms, teaching, and learning."
+  }
+},
+{
+  "model": "builder.activity",
+  "pk": 3,
+  "fields": {
+    "order": 2,
+    "status": "active",
+    "label": "Graduation & Beyond",
+    "slug": "graduation-beyond",
+    "description": "Activities related to graduation rates, ceremonies, alumni, employment, and credential laddering."
+  }
+},
+{
+  "model": "builder.topic",
+  "pk": 1,
+  "fields": {
+    "order": 0,
+    "status": "active",
+    "label": "Student Experience",
+    "slug": "student-experience",
+    "description": "Size, composition of student body, student satisfaction , academic and career outcomes"
+  }
+},
+{
+  "model": "builder.topic",
+  "pk": 2,
+  "fields": {
+    "order": 1,
+    "status": "active",
+    "label": "Human Capital",
+    "slug": "human-capital",
+    "description": "Faculty, Staff, and Administration - demand, supply, capacity, satisfaction"
+  }
+},
+{
+  "model": "builder.topic",
+  "pk": 3,
+  "fields": {
+    "order": 2,
+    "status": "active",
+    "label": "Fiscal & Facilities",
+    "slug": "fiscal-facilities",
+    "description": "Program costs, space allocation, specialized equipment, tuition, funding"
+  }
+},
+{
+  "model": "builder.topic",
+  "pk": 4,
+  "fields": {
+    "order": 3,
+    "status": "active",
+    "label": "Reputation",
+    "slug": "reputation",
+    "description": "How is the program perceived by prospective students and their families, the ministry, other academic institutions, and the local community?"
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 1,
+  "fields": {
+    "status": "active",
+    "activity": 1,
+    "topic": 1,
+    "label": "Student Recruitment",
+    "slug": "student-recruitment",
+    "description": "Assesses interest in and demand for program."
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 2,
+  "fields": {
+    "status": "active",
+    "activity": 2,
+    "topic": 1,
+    "label": "Classroom Experience",
+    "slug": "classroom-experience",
+    "description": "Assess teaching & learning,  student perceptions and satisfaction"
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 3,
+  "fields": {
+    "status": "active",
+    "activity": 3,
+    "topic": 1,
+    "label": "Graduate Success",
+    "slug": "graduate-success",
+    "description": "Assess program outcomes, graduation rates, after-grad employment, and engagement of Alumni"
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 4,
+  "fields": {
+    "status": "active",
+    "activity": 2,
+    "topic": 3,
+    "label": "Classroom Infrastructure",
+    "slug": "class-infrastructure",
+    "description": "Assess program's use and demand for classroom space, equipment, etc."
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 5,
+  "fields": {
+    "status": "active",
+    "activity": 2,
+    "topic": 2,
+    "label": "Faculty & Staff Capacity",
+    "slug": "faculty-staff-capacity",
+    "description": "Assess expertise, experience, capacity of faculty, staff, admin to deliver on program learning objectives."
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 6,
+  "fields": {
+    "status": "active",
+    "activity": 1,
+    "topic": 3,
+    "label": "Recuitment Costs",
+    "slug": "recruitment-costs",
+    "description": "Cost of program marketing and recruitment efforts, effectiveness, ROI"
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 7,
+  "fields": {
+    "status": "active",
+    "activity": 1,
+    "topic": 4,
+    "label": "Brand Recognition",
+    "slug": "brand-recognition",
+    "description": "Assess the degree to which program is recognized, in both domestic and international markets."
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 8,
+  "fields": {
+    "status": "active",
+    "activity": 2,
+    "topic": 4,
+    "label": "Academic Integrity",
+    "slug": "academic-integrity",
+    "description": "Assess rigour and academic standards, and how program is received by other institutions and public."
+  }
+},
+{
+  "model": "builder.assessmentcategory",
+  "pk": 9,
+  "fields": {
+    "status": "active",
+    "activity": 3,
+    "topic": 4,
+    "label": "Alumni as Citizens",
+    "slug": "alumni-citizens",
+    "description": "Assess success of program alumni and the degree to which they are engaged, productive citizens"
+  }
+},
+{
+  "model": "builder.referencedocument",
+  "pk": 1,
+  "fields": {
+    "order": 0,
+    "category": 1,
+    "label": "Business-Higher Education Forum (2017, PDF)",
+    "description": "Demand analysis for DS programs in US",
+    "url": "https://www.bhef.com/sites/default/files/bhef_2017_investing_in_dsa.pdf"
+  }
+},
+{
+  "model": "builder.referencedocument",
+  "pk": 2,
+  "fields": {
+    "order": 0,
+    "category": 2,
+    "label": "BSc Goals and Objectives (2018) (pdf)",
+    "description": "Data Science Program Goals and Student Learning Outcomes",
+    "url": "http://cse.aua.am/files/2018/01/BS-in-Data-Science-Curriculum-Map.pdf"
+  }
+},
+{
+  "model": "builder.referencedocument",
+  "pk": 3,
+  "fields": {
+    "order": 1,
+    "category": 2,
+    "label": "Berkley DS Curric. Guidelines (pdf)",
+    "description": "Data Science Curriculum Guidelines",
+    "url": "https://www.stat.berkeley.edu/Data.Science.Guidelines.16.9.25.pdf"
+  }
+},
+{
+  "model": "builder.assessmentquestion",
+  "pk": 1,
+  "fields": {
+    "order": 0,
+    "status": "active",
+    "category": 1,
+    "label": "Student demand",
+    "description": "Historical, present, and future demand for the program"
+  }
+},
+{
+  "model": "builder.assessmentquestion",
+  "pk": 2,
+  "fields": {
+    "order": 0,
+    "status": "active",
+    "category": 2,
+    "label": "Learning Objectives",
+    "description": "Evaluate course and program learning objectives"
+  }
+},
+{
+  "model": "builder.assessmentquestion",
+  "pk": 3,
+  "fields": {
+    "order": 1,
+    "status": "active",
+    "category": 2,
+    "label": "Student Evaluations",
+    "description": "Metrics from faculty, course, and program evaluations / feedback"
+  }
+},
+{
+  "model": "builder.metricchoicestype",
+  "pk": 1,
+  "fields": {
+    "label": "Percentage Range",
+    "choice_map": "{ \"< 50%\" : 0, \"50 - 80%\" : 1, \">80%\" : 2 }"
+  }
+},
+{
+  "model": "builder.metricchoicestype",
+  "pk": 2,
+  "fields": {
+    "label": "Ranking out of 5",
+    "choice_map": "{ \"<=2\" : 0,  \"2 - 4\" : 1,  \">4\" : 2 }"
+  }
+},
+{
+  "model": "builder.metricchoicestype",
+  "pk": 3,
+  "fields": {
+    "label": "Satisfactory / Not",
+    "choice_map": "{ \"Not Satisfactory\" : 0, \"Satisfactory\" : 1, \"Excellent\" : 2 }"
+  }
+},
+{
+  "model": "builder.metricchoicestype",
+  "pk": 4,
+  "fields": {
+    "label": "Ratio",
+    "choice_map": "{ \"< 3\" : 0, \"3 - 10\" : 1, \">10%\" : 2 }"
+  }
+},
+{
+  "model": "builder.assessmentmetric",
+  "pk": 1,
+  "fields": {
+    "order": 2,
+    "status": "active",
+    "question": 3,
+    "label": "% rank above average",
+    "description": "Percentage of students ranking program courses as \"above average\" or better",
+    "choices": 1
+  }
+},
+{
+  "model": "builder.assessmentmetric",
+  "pk": 2,
+  "fields": {
+    "order": 0,
+    "status": "active",
+    "question": 3,
+    "label": "Average rank for courses",
+    "description": "Rank (out of 5) from student evaluations across all courses in program.",
+    "choices": 2
+  }
+},
+{
+  "model": "builder.assessmentmetric",
+  "pk": 3,
+  "fields": {
+    "order": 1,
+    "status": "active",
+    "question": 3,
+    "label": "Average rank for instructors",
+    "description": "Rank (out of 5) from student evaluations across all instructors in program.",
+    "choices": 2
+  }
+},
+{
+  "model": "builder.assessmentmetric",
+  "pk": 4,
+  "fields": {
+    "order": 0,
+    "status": "active",
+    "question": 2,
+    "label": "Courses objectives are achievable and rigorous",
+    "description": "Subjective assessment of course-level objectives for all required courses in program.",
+    "choices": 3
+  }
+},
+{
+  "model": "builder.assessmentmetric",
+  "pk": 5,
+  "fields": {
+    "order": 1,
+    "status": "active",
+    "question": 2,
+    "label": "Program objectives are achievable and meaninful",
+    "description": "Subjective assessment of program goals and objectives.",
+    "choices": 3
+  }
+},
+{
+  "model": "builder.assessmentmetric",
+  "pk": 6,
+  "fields": {
+    "order": 0,
+    "status": "active",
+    "question": 1,
+    "label": "Apply / Accept  ratio",
+    "description": "Ratio of program applications to accepted students.",
+    "choices": 4
+  }
+}
+]

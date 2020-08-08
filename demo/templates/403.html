@@ -1,0 +1,13 @@
+{% extends 'base_error.html' %}
+
+{% block title %} | Permission Denied {% endblock %}
+
+{% block error_message %}
+        <div class="error-403">
+          <h2>Permission Denied - Access Forbidden (403).</h2>
+          <p>
+            You have requested a URL (web page address) for which you do not have permissions.<br>
+            Perhaps you need to <a href="{% url 'login' %}">log in</a> to access this page?
+          </p>
+        </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base_error.html' %}
+
+{% block title %} | Page Not Found {% endblock %}
+
+{% block error_message %}
+    <div class="error-404">
+        <h2>The requested page was not found (404).</h2>
+        <p>
+        You have requested a URL (web page address) that is not recognized by the system.
+        </p>
+    </div>
+
+    <p>Please use the menu to navigate to the page you were looking for.</p>
+
+{% endblock %}

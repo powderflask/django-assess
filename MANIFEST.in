@@ -1,0 +1,8 @@
+include README.rst
+include AUTHORS
+include LICENSE
+recursive-include assessment/assess/templates *
+recursive-include demo/templates *
+recursive-include demo/static *
+include demo/fixtures.json
+global-exclude *.orig *.pyc *.log *.swp

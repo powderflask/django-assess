@@ -1,0 +1,49 @@
+{# an assessment form with a set of metric_forms, organized hierachically by category and question #}
+<form class="assessment-form" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <div class="status-widget">
+        {{ form.as_p }}
+    </div>
+
+    {% for category, question_forms in metric_forms.items %}
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-{{ assessment_record.pk }}">
+          <h4 class="panel-title">
+            {% include 'assessment/include/assessment_record_score_badge.html' with record=assessment_record %}
+            <a role="button" data-toggle="collapse" data-parent="#accordion"
+               href="#collapse-{{ assessment_record.pk }}" aria-expanded="true" aria-controls="collapse-{{ assessment_record.pk }}">
+            {{ assessment_record.category }}
+            </a>
+          </h4>
+        </div>
+
+        <div id="collapse-{{ assessment_record.pk }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-{{ assessment_record.pk }}">
+            <div class="panel-group">
+              {% for question, metric_forms in question_forms.items %}
+                <div class="assessment-record-questions panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">{{ question }}</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                          {% for metric_form in metric_forms %}
+                            <li class="list-group-item">
+                                <h5 class="bg-primary">{{ metric_form.instance.metric }}</h5>
+                                <table class="table">
+                                    {{ metric_form.as_table }}
+                                </table>
+                                {% include 'assessment/include/inline_formset.html' with formset=metric_form.docs_formset %}
+                            </li>
+                          {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="form-actions">
+        <input class="btn btn-primary" type="submit" value="Save">
+        <a class="btn btn-default" href="{{ assessment_record.get_absolute_url }}" title="Discard edits made on this form">Cancel</a>
+    </div>
+</form>

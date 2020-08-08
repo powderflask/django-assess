@@ -1,0 +1,14 @@
+{% extends 'base_error.html' %}
+
+{% block title %} | Site Maintenance {% endblock %}
+
+{% block error_message %}
+    <div class="error-503">
+      <h2>Site is Offline for Maintenance.</h2>
+      <p>
+         QA/QC site is currently down for maintenance -- please contact us for details.
+      </p>
+    </div>
+
+    <p>This service is temporarily unavailable.  Please try back later.</p>
+{% endblock %}

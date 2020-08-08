@@ -1,0 +1,6 @@
+Django>=2.2.7
+django-ordered-model
+django-private-storage>=2.2
+django-tables2
+django-filter
+tablib

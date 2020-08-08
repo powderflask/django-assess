@@ -1,0 +1,12 @@
+/.idea
+/scrap_heap/
+/todo.txt
+/demo/db.sqlite3*
+/assessment/tests/private-media/
+/private-media/
+/docs/_build/
+/docs/_static/
+/docs/_templates/
+/dist/
+/.eggs/
+/django_assess.egg-info/

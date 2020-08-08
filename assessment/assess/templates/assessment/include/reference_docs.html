@@ -1,0 +1,11 @@
+<div class="btn-group" role="group">
+  <button class="btn btn-default dropdown-toggle" type="button" id="refDocs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Reference Docs.
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="refDocs">
+      {% for doc in category.reference_docs.all %}
+        <li><a href="{{ doc.url }}" title="{{ doc.description }}" target="_blank">{{doc}}</a></li>
+      {% endfor %}
+  </ul>
+</div>

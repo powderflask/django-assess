@@ -1,0 +1,31 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+        {% if form.errors %}
+            <div class="alert alert-warning">
+                <p>Login Failed.  Your username and/or password didn't match. Please try again. </p>
+                <p>Use the "Lost Password" link below to receive a new password by e-mail.</p>
+            </div>
+        {% endif %}
+
+        <h2>Login to your HydroNet Account</h2>
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Your account doesn't have permissions to access this page. Request permission from your supervisor.</p>
+            {% endif %}
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <table>
+                {{ form }}
+            </table>
+            <input type='hidden' name='next' value='{{ next }}'>
+            <div class='button_row'><button type='submit'>Log in</button></div>
+        </form>
+
+        <div>
+            <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+        </div>
+{% endblock %}

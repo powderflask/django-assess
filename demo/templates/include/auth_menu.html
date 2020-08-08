@@ -1,0 +1,18 @@
+<div class="nav navbar-right">
+    {% if user.is_authenticated %}
+        <div class="btn-group dropdown auth_menu">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user }}
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+              <li class="logout"><a href="{% url 'logout' %}">Logout</a></li>
+              <li class="divider"></li>
+              <li><a href="http://www.chartwell-consultants.com/contact/" target="_blank">Contact CCL</a></li>
+          </ul>
+        </div>
+    {% else %}
+        <a class="btn btn-default" href="{% url 'login' %}" role="button">Login</a>
+    {% endif %}
+</div>

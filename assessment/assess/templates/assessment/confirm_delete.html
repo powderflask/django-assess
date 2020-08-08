@@ -1,0 +1,16 @@
+{% extends 'assessment/base.html' %}
+
+{% block content %}
+
+    <h3>Confirm Delete</h3>
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete <mark>{{ object }}</mark>?</p>
+        <h5 class="bg-danger">This action cannot be undone - all assessment metric scores and supporting docs will be deleted.</h5>
+        <p>
+            <a class="btn btn-default" href="{{ cancel_url }}" type="button">Cancel</a>
+            <input class="btn btn-primary" type="submit" value="Confirm">
+        </p>
+    </form>
+
+{% endblock content %}

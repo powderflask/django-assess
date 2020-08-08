@@ -1,0 +1,34 @@
+{% extends 'assessment/base.html' %}
+{% load django_tables2 %}
+
+{% block content %}
+
+    <h2>Assessment Sets in: {{ group }}</h2>
+
+    <div>
+        <div class="btn-group pull-right" role="group">
+            {% if user_can_create_assessment %}
+                <a class="btn btn-primary" href="{% url 'assessment.assess:group-create' group.slug %}">
+                    New Assessment Set
+                </a>
+            {% endif %}
+            {% include 'assessment/include/reference_docs.html' with category=group %}
+        </div>
+        {% if filter %}
+            <form action="" method="get" class="form form-inline filter-form">
+                    {{ filter.form }}
+                    <span class="form-group"><input class="btn btn-primary" type="submit" value="Filter"></span>
+            </form>
+        {% endif %}
+
+    </div>
+    <h3>Assessment Sets:</h3>
+    <div class="assessments-list">
+        {% if table.rows|length > 0 %}
+            {% render_table table %}
+        {% else %}
+            <h4 class="text-muted">No data were found matching given filter criteria. Please revise your filter. </h4>
+        {% endif %}
+    </div>
+
+{% endblock content %}

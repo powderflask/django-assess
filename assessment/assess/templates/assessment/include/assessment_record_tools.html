@@ -1,0 +1,16 @@
+{# A div with RUD links for an assessment record object  #}
+<div class="assessment-record-tools">
+    <a href="{{ record.get_absolute_url }}" title="View Assessment Record Details">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+    </a>
+    {% if user_can_edit_assessment %}
+        <a href="{{ record.get_update_url }}" title="Edit this Assessment Record">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a>
+    {% endif %}
+    {% if user_can_delete_assessment %}
+        <a class="text-danger" href="{{ record.get_delete_url }}" title="Delete this Assessment Record">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        </a>
+    {% endif %}
+</div>

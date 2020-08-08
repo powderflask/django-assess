@@ -1,0 +1,20 @@
+{% extends 'assessment/record/base.html' %}
+{% load helper_tags %}
+
+{% block content %}
+
+    <h3>Create Assessment Record in: {{ category|linkify }}</h3>
+
+    <form method="post">{% csrf_token %}
+        <table class="table">
+            {{ subject_form.as_table }}
+            {{ form.as_table }}
+        </table>
+
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="Save and Continue">
+        </div>
+
+    </form>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+
+<div class="assessment-record panel panel-default">
+    <div class="panel-body">
+        <dl class="dl-single-horizontal">
+            <dt>
+            {% include 'assessment/include/assessment_record_score_badge.html' with record=assessment_record %}
+                <span class="subject">{{ assessment_record.subject }}</span>
+        </dt>
+        <dd>
+        {{ assessment_record.subject.description }}
+        </dd>
+        </dl>
+
+        <span class="assessor">
+            <span class="text-primary">{{ assessment_record.get_assessment_type_display }}</span>
+            Assesed by: <span class="text-primary">{{ assessment_record.assessor.get_full_name }}</span>
+            on <span class="text-primary">{{ assessment_record.created }}</span>
+        </span>
+        {% if assessment_record.last_edited.date != assessment_record.created.date %}
+            <div class="last-edited">
+                (Last edited {{ assessment_record.last_edited }} by {{ assessment_record.last_edited_by.get_full_name }})
+            </div>
+        {% endif %}
+        <div class="status {{ assessment_record.status }}">
+            {{ assessment_record.get_status_display }}
+        </div>
+    </div>
+
+</div>
+

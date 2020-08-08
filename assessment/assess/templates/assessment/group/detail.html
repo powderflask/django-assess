@@ -1,0 +1,19 @@
+{% extends 'assessment/group/base.html' %}
+{% load helper_tags %}
+
+{% block content %}
+    <div class="pull-right">
+        {% include 'assessment/include/reference_docs.html' with category=assessment_group %}
+    </div>
+
+    <h3>Assessment Set in: {{ assessment_group.root|linkify }}</h3>
+
+    {% include 'assessment/include/assessment_record_info.html' with assessment_record=assessment_group %}
+
+    <div class="assessment-scores panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {% for assessment_record in assessment_group.assessment_set.all %}
+            {% include 'assessment/include/assessment_scores.html' %}
+        {% endfor %}
+    </div>
+
+{% endblock content %}
