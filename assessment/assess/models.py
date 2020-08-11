@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from assessment import settings
 from assessment.builder.models import (  # import all builder models so they are available on import assess.models
     Activity, Topic, AssessmentCategory,
     AssessmentQuestion, AssessmentMetric, ReferenceDocument
@@ -292,8 +293,6 @@ class AssessmentRecord(AbstractAssessmentRecord):
 
 def get_assessment_subject_model():
     """ Get swappable concrete Assessment Subject model """
-    from django.apps import apps
-    appConfig = apps.get_app_config('assess')
     return apps.get_model(appConfig.settings.SUBJECT_MODEL)
 
 
@@ -320,31 +319,31 @@ class AbstractAssessmentSubject(models.Model):
         """ Concrete implementations MUST supply method that returns a modelform for this model """
         raise NotImplemented
 
+if settings.ASSESSMENT_SUBJECT_MODEL == 'assess.AssessmentSubject':
+    class AssessmentSubject(AbstractAssessmentSubject):
+        """
+            Default Concrete Assessment Subject, can be overridden with ASSESSMENT_SUBJECT_MODEL setting.
+        """
+        label = models.CharField(max_length=128,  verbose_name='Subject',
+                                 help_text='Short label for the subject of this assessment')
+        description = models.TextField(blank=True,
+                                       help_text='Optional longer description of the assessment subject.')
 
-class AssessmentSubject(AbstractAssessmentSubject):
-    """
-        Default Concrete Assessment Subject, can be overridden with ASSESSMENT_SUBJECT_MODEL setting.
-    """
-    label = models.CharField(max_length=128,  verbose_name='Subject',
-                             help_text='Short label for the subject of this assessment')
-    description = models.TextField(blank=True,
-                                   help_text='Optional longer description of the assessment subject.')
+        def __str__(self):
+            return self.label
 
-    def __str__(self):
-        return self.label
-
-    @classmethod
-    def get_modelform(cls, **kwargs):
-        """ return a modelform used to create / edit this model """
-        from django import forms
-        if not 'exclude' in kwargs:
-            kwargs['fields'] = kwargs.get('fields', ('label', 'description', 'record'))
-        kwargs['widgets'] = kwargs.get('widgets',
-                                       {
-                                          'description': forms.Textarea(attrs={'rows': 2, 'cols': 80}),
-                                          'record'     : forms.HiddenInput()
-                                       })
-        return forms.modelform_factory(cls, **kwargs)
+        @classmethod
+        def get_modelform(cls, **kwargs):
+            """ return a modelform used to create / edit this model """
+            from django import forms
+            if not 'exclude' in kwargs:
+                kwargs['fields'] = kwargs.get('fields', ('label', 'description', 'record'))
+            kwargs['widgets'] = kwargs.get('widgets',
+                                           {
+                                              'description': forms.Textarea(attrs={'rows': 2, 'cols': 80}),
+                                              'record'     : forms.HiddenInput()
+                                           })
+            return forms.modelform_factory(cls, **kwargs)
 
 
 class ScoreManager(models.Manager):

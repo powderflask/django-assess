@@ -1,11 +1,11 @@
 
-Assessments
-===========
+Django Assessments
+==================
 
 Basic custom assessments as a reusable django app.
 
 Use Case:
- * you are creating a QC/QA program for assessing a business process or organization units
+ * you are creating a QC/QA program for assessing a business process or organizational units
  * you want to assess 1 or more "activties" within the process or units;
  * for each activity, an assessment is performed in 1 or more categories;
  * each assessment category presents 1 or more assessment questions;
