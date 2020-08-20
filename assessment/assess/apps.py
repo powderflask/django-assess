@@ -1,5 +1,5 @@
 from collections import namedtuple
-from django.apps import AppConfig
+from django.apps import apps, AppConfig
 import django.conf
 from assessment import settings
 
@@ -22,6 +22,16 @@ class BaseAssessConfig(AppConfig):
         SCORE_CLASSES = settings.ASSESSMENT_SCORE_CLASSES,
         PERMISSIONS=settings.ASSESSMENT_PERMISSIONS,
     )
+
+    @classmethod
+    def get_assessment_subject_model(cls):
+        """ Get swappable concrete Assessment Subject model """
+        return apps.get_model(cls.settings.SUBJECT_MODEL)
+
+    @classmethod
+    def get_assessment_subject_related_name(cls):
+        """ Return the "related_name" for reverse access to the SUBJECT_MODEL: appname_modelname """
+        return cls.get_assessment_subject_model()._meta.label.lower().replace('.', '_')
 
 
 class PublicAssessConfig(BaseAssessConfig):

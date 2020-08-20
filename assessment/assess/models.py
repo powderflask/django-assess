@@ -15,6 +15,11 @@ from django.apps import apps
 appConfig = apps.get_app_config('assess')
 
 
+def get_assessment_subject_model():
+    """ Get swappable concrete Assessment Subject model """
+    return appConfig.get_assessment_subject_model()
+
+
 class DraftsQueryset(models.QuerySet):
     """ Custom query set for models with drafts / complete """
     def drafts(self):
@@ -39,17 +44,21 @@ class AssessmentQueryset(DraftsQueryset):
 
 class AssessmentManager(models.Manager):
     def get_queryset(self):
-        select = ('subject', 'group', 'category', 'category__topic', 'category__activity')
+        subject = appConfig.get_assessment_subject_related_name()
+        select = (subject, 'group', 'category', 'category__topic', 'category__activity')
         prefetch = ('score_set', 'score_set__doc_set', 'score_set__metric')
-        return super().get_queryset().select_related(*select).prefetch_related(*prefetch)\
+        return super().get_queryset().select_related(*select)\
+                                     .prefetch_related(*prefetch)\
                                      .annotate_avg_score()
 
 class AssessmentSetManager(models.Manager):
-
     def get_queryset(self):
-        prefetch = ('assessment_set', 'assessment_set__score_set',
+        assessment_set_subject = 'assessment_set__{}'.format(appConfig.get_assessment_subject_related_name())
+        prefetch = ('assessment_set', assessment_set_subject, 'assessment_set__score_set',
                     'assessment_set__score_set__doc_set', 'assessment_set__score_set__metric')
-        return super().get_queryset().select_related('activity', 'topic').prefetch_related(*prefetch)\
+
+        return super().get_queryset().select_related('activity', 'topic')\
+                                     .prefetch_related(*prefetch)\
                                      .annotate_avg_score(field_name='assessment_set__score_set')
 
 
@@ -244,6 +253,12 @@ class AssessmentRecord(AbstractAssessmentRecord):
         return reverse('assessment.assess:delete', args=(self.pk, ))
 
     @property
+    def subject(self):
+        """ Return the subject for this assessment record """
+        subject_field = appConfig.get_assessment_subject_related_name()
+        return getattr(self, subject_field, None)
+
+    @property
     def has_subject(self):
         """  No assessment assess should exist without a subject, but hard to force this at ref. integrity layer """
         try:
@@ -291,11 +306,6 @@ class AssessmentRecord(AbstractAssessmentRecord):
             AssessmentRecord.objects.filter(pk=self.pk)
 
 
-def get_assessment_subject_model():
-    """ Get swappable concrete Assessment Subject model """
-    return apps.get_model(appConfig.settings.SUBJECT_MODEL)
-
-
 class AbstractAssessmentSubject(models.Model):
     """
         The subject of an Assessment (i.e, what is the person, project, thing being assessed)
@@ -304,7 +314,9 @@ class AbstractAssessmentSubject(models.Model):
              that implements this interface.
     """
     # Re: blank=True - no other reasonable way to validate modelforms that don't include required field ** sigh **
-    record = models.OneToOneField(AssessmentRecord, blank=True, on_delete=models.CASCADE, related_name='subject')
+    # Re: related_name - see https://docs.djangoproject.com/en/2.2/topics/db/models/#be-careful-with-related-name-and-related-query-name
+    record = models.OneToOneField(AssessmentRecord, blank=True, on_delete=models.CASCADE,
+                                  related_name='%(app_label)s_%(class)s')
 
     class Meta:
         abstract = True
@@ -319,31 +331,31 @@ class AbstractAssessmentSubject(models.Model):
         """ Concrete implementations MUST supply method that returns a modelform for this model """
         raise NotImplemented
 
-if settings.ASSESSMENT_SUBJECT_MODEL == 'assess.AssessmentSubject':
-    class AssessmentSubject(AbstractAssessmentSubject):
-        """
-            Default Concrete Assessment Subject, can be overridden with ASSESSMENT_SUBJECT_MODEL setting.
-        """
-        label = models.CharField(max_length=128,  verbose_name='Subject',
-                                 help_text='Short label for the subject of this assessment')
-        description = models.TextField(blank=True,
-                                       help_text='Optional longer description of the assessment subject.')
 
-        def __str__(self):
-            return self.label
+class AssessmentSubject(AbstractAssessmentSubject):
+    """
+        Default Concrete Assessment Subject, can be overridden with ASSESSMENT_SUBJECT_MODEL setting.
+    """
+    label = models.CharField(max_length=128,  verbose_name='Subject',
+                             help_text='Short label for the subject of this assessment')
+    description = models.TextField(blank=True,
+                                   help_text='Optional longer description of the assessment subject.')
 
-        @classmethod
-        def get_modelform(cls, **kwargs):
-            """ return a modelform used to create / edit this model """
-            from django import forms
-            if not 'exclude' in kwargs:
-                kwargs['fields'] = kwargs.get('fields', ('label', 'description', 'record'))
-            kwargs['widgets'] = kwargs.get('widgets',
-                                           {
-                                              'description': forms.Textarea(attrs={'rows': 2, 'cols': 80}),
-                                              'record'     : forms.HiddenInput()
-                                           })
-            return forms.modelform_factory(cls, **kwargs)
+    def __str__(self):
+        return self.label
+
+    @classmethod
+    def get_modelform(cls, **kwargs):
+        """ return a modelform used to create / edit this model """
+        from django import forms
+        if not 'exclude' in kwargs:
+            kwargs['fields'] = kwargs.get('fields', ('label', 'description', 'record'))
+        kwargs['widgets'] = kwargs.get('widgets',
+                                       {
+                                          'description': forms.Textarea(attrs={'rows': 2, 'cols': 80}),
+                                          'record'     : forms.HiddenInput()
+                                       })
+        return forms.modelform_factory(cls, **kwargs)
 
 
 class ScoreManager(models.Manager):
