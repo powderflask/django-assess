@@ -16,7 +16,7 @@ appConfig = apps.get_app_config('assess')
 
 
 def get_assessment_subject_model():
-    """ Get swappable concrete Assessment Subject model """
+    """ Return swappable concrete Assessment Subject model """
     return appConfig.get_assessment_subject_model()
 
 
@@ -252,11 +252,17 @@ class AssessmentRecord(AbstractAssessmentRecord):
     def get_delete_url(self):
         return reverse('assessment.assess:delete', args=(self.pk, ))
 
-    @property
-    def subject(self):
+    def get_subject(self):
         """ Return the subject for this assessment record """
         subject_field = appConfig.get_assessment_subject_related_name()
         return getattr(self, subject_field, None)
+
+    def set_subject(self, subject):
+        """ Set the subject for this assessment record """
+        subject_field = appConfig.get_assessment_subject_related_name()
+        setattr(self, subject_field, subject)
+
+    subject = property(get_subject, set_subject)
 
     @property
     def has_subject(self):
