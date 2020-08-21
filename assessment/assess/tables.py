@@ -1,9 +1,13 @@
+from django.apps import apps
 from django.template.loader import get_template
 import django_tables2 as tables
 from django_tables2.export.views import ExportMixin
 from django_filters.views import FilterView
 from assessment.assess import models
 from .permissions import get_permissions_context_from_request
+
+appConfig = apps.get_app_config('assess')
+
 
 class TemplateRenderedColumn(tables.Column):
     TEMPLATE = None
@@ -37,10 +41,9 @@ class RecordActionsColumn(TemplateRenderedColumn):
 
 
 class SubjectColumn(tables.Column):
+    base_subject_field = appConfig.get_assessment_subject_related_name()
 
-    def __init__(self, *args, subject_field='subject', **kwargs):
-        from django.apps import apps
-        appConfig = apps.get_app_config('assess')
+    def __init__(self, *args, subject_field=base_subject_field, **kwargs):
         subject_ordering = tuple(
             '{subject_field}__{order_by_field}'.format(subject_field=subject_field, order_by_field=field)
             for field in appConfig.settings.SUBJECT_ORDER_BY
@@ -61,7 +64,6 @@ class BaseAssessmentTable(tables.Table):
         fields = [
             'status',
             'subject',
-            'assessment_type',
             'score',
             'created',
             'assessor',
@@ -93,8 +95,8 @@ class CategoryAssessmentsTable(BaseAssessmentTable):
 
 
 class AssessmentSetTable(BaseAssessmentTable):
-    subject = SubjectColumn(accessor='subject', linkify=True,
-                            subject_field='assessment_set__first__subject')
+    subject_field = 'assessment_set__first__{subject}'.format(subject=appConfig.get_assessment_subject_related_name())
+    subject = SubjectColumn(accessor='subject', linkify=True, subject_field=subject_field)
 
     class Meta(BaseAssessmentTable.Meta):
         model = models.AssessmentGroup

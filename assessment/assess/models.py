@@ -20,6 +20,11 @@ def get_assessment_subject_model():
     return appConfig.get_assessment_subject_model()
 
 
+def get_assessment_subject_related_name():
+    """ Return the "related_name" for reverse access to the SUBJECT_MODEL: appname_modelname """
+    return appConfig.get_assessment_subject_related_name()
+
+
 class DraftsQueryset(models.QuerySet):
     """ Custom query set for models with drafts / complete """
     def drafts(self):
@@ -331,6 +336,29 @@ class AbstractAssessmentSubject(models.Model):
     def __str__(self):
         """ Concrete implementations should override this to provide a user-friendly label for subject """
         return "Subject-{}".format(self.pk)
+
+    @classmethod
+    def get_related_subject_filterset(cls, subject_accessor):
+        """
+        Return a filters.FilterSet class for the AssessmentSubject class
+        :param subject_accessor string with accessor name for subject related to Assessment model.
+        :return a filters.FilterSet class to be used as a base class for Assessment FilterSets defined with related subject fields.
+        """
+        from django import forms
+        import django_filters as filters
+        class SubjectFilterSet(filters.FilterSet):
+            subject = filters.CharFilter(label='Subject',
+                                         field_name='{subject}__label'.format(subject=subject_accessor),
+                                         lookup_expr='icontains',
+                                         widget=forms.TextInput(attrs={'class':'form-control'}))
+
+            class Meta:
+                model = get_assessment_subject_model()
+                fields = [
+                    'subject',
+                ]
+
+        return SubjectFilterSet
 
     @classmethod
     def get_modelform(cls):

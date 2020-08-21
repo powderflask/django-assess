@@ -43,9 +43,7 @@ class AbstractGroupView(tables.BaseFilteredTableView):
     group_model = None  # Sub-classes MUST define the concrete group-type model
     slug_filter = ''    # Sub-classes MUST define a queryset filter key suitable for filtering Groups by slug
     table_class = tables.AssessmentSetTable
-    export_table_class = None
     filterset_class = filters.GroupAssessmentsFilter
-    export_filterset_class = None
     template_name = 'assessment/groups.html'
 
     @cached_property
@@ -78,9 +76,7 @@ class TopicView(AbstractGroupView):
 @permission_required(permissions.user_can_view_assessments)
 class AssessmentCategoryView(tables.BaseFilteredTableView):
     table_class = tables.CategoryAssessmentsTable
-    export_table_class = None
     filterset_class = filters.CategoryAssessmentsFilter
-    export_filterset_class = None
 
     template_name = 'assessment/category.html'
 
