@@ -15,13 +15,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png' %}">
 
     <title>
-        QA/QC {% block title %}{% endblock title %}
+       {% block title %}{% endblock title %} |  QA/QC
     </title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" integrity="sha384-HIipfSYbpCkh5/1V87AWAeR5SUrNiewznrUrtNz1ux4uneLhsAKzv/0FnMbj3m6g" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Antic" rel="stylesheet"  crossorigin="anonymous">
-    <link href="{% static '/css/styles.css' %}" rel="stylesheet" >
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" >
 
     {% block extra_head %}{% endblock extra_head %}
 

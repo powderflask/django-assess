@@ -201,6 +201,11 @@ form input[name='label'] {
     color: darkgreen;
 }
 
+.assessment-filter {
+    text-align: right;
+    margin-top: 1em;
+}
+
 /* a little CSS hackery here to keep templates clean - move status widget up to cover over status value */
 .assessment-form {
     position: relative;

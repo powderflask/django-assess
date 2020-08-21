@@ -63,6 +63,7 @@ class BaseAssessmentTable(tables.Table):
         model = None   # Sub-classes must override
         fields = [
             'status',
+            'assessment_type',
             'subject',
             'score',
             'created',
