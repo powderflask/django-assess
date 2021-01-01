@@ -17,7 +17,8 @@ from .permissions import permissions, permission_required, get_permissions_conte
 # No permission to view top-level matrix categories
 class AssessmentMatrixView(generic.ListView):
     model = models.AssessmentCategory
-    queryset = models.AssessmentCategory.active.all().order_by('topic', 'activity')
+    queryset = models.AssessmentCategory.active.select_related('topic', 'activity')\
+                                               .order_by('topic__order', 'activity__order')
     context_object_name = 'categories'
     template_name = 'assessment/matrix.html'
 
